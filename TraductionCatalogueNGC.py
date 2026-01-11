@@ -5,7 +5,7 @@ input_file = 'NGCObjects.xls'
 output_file = 'NGCObjects_FR.xlsx'
 # ---------------------
 
-# Dictionnaires (inchangés)
+# Dictionnaires
 type_map = {
     'Open Cluster': 'Amas ouvert',
     'Globular Cluster': 'Amas globulaire',
@@ -22,7 +22,10 @@ type_map = {
     'Cluster associated with nebulosity': 'Amas avec nébulosité',
     'Emission Nebula': 'Nébuleuse en émission',
     'Reflection Nebula': 'Nébuleuse par réflexion',
-    'Dark Nebula': 'Nébuleuse obscure'
+    'Dark Nebula': 'Nébuleuse obscure',
+    # Ajouts de sécurité pour les cas fréquents
+    'Galaxy': 'Galaxie',
+    'Nebula': 'Nébuleuse'
 }
 
 const_map = {
@@ -58,24 +61,23 @@ const_map = {
 try:
     print(f"Lecture du fichier {input_file} en cours...")
     
-    # CORRECTION : header=2 pour sauter les deux premières lignes (titre + vide)
+    # header=2 pour sauter les deux premières lignes
     df = pd.read_excel(input_file, header=2)
     
-    # DEBUG : Affiche les colonnes trouvées dans le log
     print(f"Colonnes détectées : {list(df.columns)}")
 
-    # Traduction
+    # --- CORRECTION : Nettoyage des espaces ---
     if 'Type' in df.columns:
-        print("Traduction de la colonne 'Type'...")
+        print("Nettoyage et traduction de la colonne 'Type'...")
+        # On force en texte (.astype(str)) et on enlève les espaces (.str.strip())
+        df['Type'] = df['Type'].astype(str).str.strip()
         df['Type'] = df['Type'].map(type_map).fillna(df['Type'])
-    else:
-        print("ATTENTION : Colonne 'Type' non trouvée !")
     
     if 'Constellation' in df.columns:
-        print("Traduction de la colonne 'Constellation'...")
+        print("Nettoyage et traduction de la colonne 'Constellation'...")
+        df['Constellation'] = df['Constellation'].astype(str).str.strip()
         df['Constellation'] = df['Constellation'].map(const_map).fillna(df['Constellation'])
-    else:
-        print("ATTENTION : Colonne 'Constellation' non trouvée !")
+    # ------------------------------------------
 
     # Sauvegarde
     df.to_excel(output_file, index=False)

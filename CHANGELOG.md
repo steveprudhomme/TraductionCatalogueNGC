@@ -5,6 +5,12 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.1.3] - 2026-01-11
+
+### Corrigé
+- Ajout du nettoyage automatique des données (`.strip()`) pour supprimer les espaces invisibles qui empêchaient la traduction de certains termes.
+- Sécurisation de la conversion en texte (`.astype(str)`) avant traitement pour éviter les erreurs sur des cellules vides ou numériques.
+
 ## [1.1.2] - 2026-01-11
 
 ### Corrigé
