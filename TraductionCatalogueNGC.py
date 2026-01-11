@@ -1,13 +1,11 @@
 import pandas as pd
 
 # --- CONFIGURATION ---
-# Nom exact de votre fichier source (.xls)
 input_file = 'NGCObjects.xls'
-# Nom du fichier de sortie (on modernise en .xlsx)
 output_file = 'NGCObjects_FR.xlsx'
 # ---------------------
 
-# Dictionnaire de traduction pour les types
+# Dictionnaires (inchangés)
 type_map = {
     'Open Cluster': 'Amas ouvert',
     'Globular Cluster': 'Amas globulaire',
@@ -27,7 +25,6 @@ type_map = {
     'Dark Nebula': 'Nébuleuse obscure'
 }
 
-# Dictionnaire partiel des constellations (Latin -> Français)
 const_map = {
     'Andromeda': 'Andromède', 'Antlia': 'Machine pneumatique', 'Apus': 'Oiseau de paradis',
     'Aquarius': 'Verseau', 'Aquila': 'Aigle', 'Ara': 'Autel', 'Aries': 'Bélier',
@@ -61,24 +58,30 @@ const_map = {
 try:
     print(f"Lecture du fichier {input_file} en cours...")
     
-    # Lecture EXCEL (.xls)
-    # Le moteur 'xlrd' est nécessaire pour les anciens fichiers .xls
-    df = pd.read_excel(input_file)
+    # CORRECTION : header=2 pour sauter les deux premières lignes (titre + vide)
+    df = pd.read_excel(input_file, header=2)
     
-    # Traduction des colonnes
+    # DEBUG : Affiche les colonnes trouvées dans le log
+    print(f"Colonnes détectées : {list(df.columns)}")
+
+    # Traduction
     if 'Type' in df.columns:
+        print("Traduction de la colonne 'Type'...")
         df['Type'] = df['Type'].map(type_map).fillna(df['Type'])
+    else:
+        print("ATTENTION : Colonne 'Type' non trouvée !")
     
     if 'Constellation' in df.columns:
+        print("Traduction de la colonne 'Constellation'...")
         df['Constellation'] = df['Constellation'].map(const_map).fillna(df['Constellation'])
+    else:
+        print("ATTENTION : Colonne 'Constellation' non trouvée !")
 
-    # Sauvegarde EXCEL (.xlsx)
-    # index=False évite de créer une colonne de numérotation inutile (0,1,2...)
+    # Sauvegarde
     df.to_excel(output_file, index=False)
-    
     print(f"Traduction terminée ! Fichier Excel généré : {output_file}")
 
 except FileNotFoundError:
-    print(f"Erreur : Le fichier '{input_file}' est introuvable dans ce dossier.")
+    print(f"Erreur : Le fichier '{input_file}' est introuvable.")
 except Exception as e:
     print(f"Une erreur s'est produite : {e}")

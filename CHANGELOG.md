@@ -5,6 +5,12 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.1.2] - 2026-01-11
+
+### Corrigé
+- Correction du paramètre de lecture Excel (`header=2`) pour ignorer les lignes d'en-tête et les lignes vides du fichier source original.
+- Ajout de logs détaillés (print) listant les colonnes détectées pour faciliter le débogage futur.
+
 ## [1.1.1] - 2026-01-11
 
 ### Divers (Maintenance)
