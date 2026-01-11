@@ -5,6 +5,12 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.1.1] - 2026-01-11
+
+### Divers (Maintenance)
+- Mise à jour du fichier `.gitignore` pour exclure les logs d'exécution (`*.txt`) et les fichiers Excel générés afin de garder le dépôt propre.
+- Amélioration de la documentation de test (`TESTING.md`) avec une procédure plus détaillée et sécurisée.
+
 ## [1.1.0] - 2026-01-11
 
 ### Ajouté
