@@ -1,8 +1,11 @@
 import pandas as pd
 
-# Chargez votre fichier (assurez-vous que le nom correspond)
-input_file = 'NGCObjects.xls - Sheet1.csv'
-output_file = 'NGCObjects_FR.csv'
+# --- CONFIGURATION ---
+# Nom exact de votre fichier source (.xls)
+input_file = 'NGCObjects.xls'
+# Nom du fichier de sortie (on modernise en .xlsx)
+output_file = 'NGCObjects_FR.xlsx'
+# ---------------------
 
 # Dictionnaire de traduction pour les types
 type_map = {
@@ -56,20 +59,26 @@ const_map = {
 }
 
 try:
-    # Lecture du CSV (si séparé par des virgules)
-    df = pd.read_csv(input_file)
+    print(f"Lecture du fichier {input_file} en cours...")
+    
+    # Lecture EXCEL (.xls)
+    # Le moteur 'xlrd' est nécessaire pour les anciens fichiers .xls
+    df = pd.read_excel(input_file)
     
     # Traduction des colonnes
-    # On utilise .map() qui remplace si trouvé, sinon garde l'original grâce à .fillna() ou une méthode similaire
     if 'Type' in df.columns:
         df['Type'] = df['Type'].map(type_map).fillna(df['Type'])
     
     if 'Constellation' in df.columns:
         df['Constellation'] = df['Constellation'].map(const_map).fillna(df['Constellation'])
 
-    # Sauvegarde
-    df.to_csv(output_file, index=False, encoding='utf-8-sig') # utf-8-sig pour que Excel lise bien les accents
-    print(f"Traduction terminée ! Fichier sauvegardé sous : {output_file}")
+    # Sauvegarde EXCEL (.xlsx)
+    # index=False évite de créer une colonne de numérotation inutile (0,1,2...)
+    df.to_excel(output_file, index=False)
+    
+    print(f"Traduction terminée ! Fichier Excel généré : {output_file}")
 
+except FileNotFoundError:
+    print(f"Erreur : Le fichier '{input_file}' est introuvable dans ce dossier.")
 except Exception as e:
     print(f"Une erreur s'est produite : {e}")
