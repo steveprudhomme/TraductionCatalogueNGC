@@ -6,9 +6,8 @@ input_file = 'NGCObjects.xls'
 output_file = 'NGCObjects_FR.xlsx'
 # ---------------------
 
-# 1. Dictionnaire des Types (Complété)
+# 1. Dictionnaire des Types
 type_map = {
-    # Types communs
     'Open Cluster': 'Amas ouvert',
     'Globular Cluster': 'Amas globulaire',
     'Diffuse Nebula': 'Nébuleuse diffuse',
@@ -25,7 +24,6 @@ type_map = {
     'Emission Nebula': 'Nébuleuse en émission',
     'Reflection Nebula': 'Nébuleuse par réflexion',
     'Dark Nebula': 'Nébuleuse obscure',
-    # Nouveaux ajouts demandés
     'Star': 'Étoile',
     'Triple Star': 'Étoile triple',
     'Cluster Nebulosity': 'Nébulosité d\'amas',
@@ -35,38 +33,36 @@ type_map = {
     'Nebula': 'Nébuleuse'
 }
 
-# 2. Dictionnaire des Constellations (Partiel - s'applique aux principales)
+# 2. Dictionnaire des Constellations (Abréviations UAI -> Français)
 const_map = {
-    'Andromeda': 'Andromède', 'Antlia': 'Machine pneumatique', 'Apus': 'Oiseau de paradis',
-    'Aquarius': 'Verseau', 'Aquila': 'Aigle', 'Ara': 'Autel', 'Aries': 'Bélier',
-    'Auriga': 'Cocher', 'Bootes': 'Bouvier', 'Caelum': 'Burin', 'Camelopardalis': 'Girafe',
-    'Cancer': 'Cancer', 'Canes Venatici': 'Chiens de chasse', 'Canis Major': 'Grand Chien',
-    'Canis Minor': 'Petit Chien', 'Capricornus': 'Capricorne', 'Carina': 'Carène',
-    'Cassiopeia': 'Cassiopée', 'Centaurus': 'Centaure', 'Cepheus': 'Céphée',
-    'Cetus': 'Baleine', 'Chamaeleon': 'Caméléon', 'Circinus': 'Compas', 'Columba': 'Colombe',
-    'Coma Berenices': 'Chevelure de Bérénice', 'Corona Australis': 'Couronne australe',
-    'Corona Borealis': 'Couronne boréale', 'Corvus': 'Corbeau', 'Crater': 'Coupe',
-    'Crux': 'Croix du Sud', 'Cygnus': 'Cygne', 'Delphinus': 'Dauphin', 'Dorado': 'Dorade',
-    'Draco': 'Dragon', 'Equuleus': 'Petit Cheval', 'Eridanus': 'Éridan', 'Fornax': 'Fourneau',
-    'Gemini': 'Gémeaux', 'Grus': 'Grue', 'Hercules': 'Hercule', 'Horologium': 'Horloge',
-    'Hydra': 'Hydre', 'Hydrus': 'Hydre mâle', 'Indus': 'Indien', 'Lacerta': 'Lézard',
-    'Leo': 'Lion', 'Leo Minor': 'Petit Lion', 'Lepus': 'Lièvre', 'Libra': 'Balance',
-    'Lupus': 'Loup', 'Lynx': 'Lynx', 'Lyra': 'Lyre', 'Mensa': 'Table',
-    'Microscopium': 'Microscope', 'Monoceros': 'Licorne', 'Musca': 'Mouche',
-    'Norma': 'Règle', 'Octans': 'Octant', 'Ophiuchus': 'Serpentaire', 'Ophiucus': 'Serpentaire',
-    'Orion': 'Orion', 'Pavo': 'Paon', 'Pegasus': 'Pégase', 'Perseus': 'Persée',
-    'Phoenix': 'Phénix', 'Pictor': 'Peintre', 'Pisces': 'Poissons',
-    'Piscis Austrinus': 'Poisson austral', 'Puppis': 'Poupe', 'Pyxis': 'Boussole',
-    'Reticulum': 'Réticule', 'Sagitta': 'Flèche', 'Sagittarius': 'Sagittaire',
-    'Scorpius': 'Scorpion', 'Sculptor': 'Sculpteur', 'Scutum': 'Écu de Sobieski',
-    'Serpens': 'Serpent', 'Serpens Caput': 'Tête du Serpent', 'Serpens Cauda': 'Queue du Serpent',
-    'Sextans': 'Sextant', 'Taurus': 'Taureau', 'Telescopium': 'Télescope',
-    'Triangulum': 'Triangle', 'Triangulum Australe': 'Triangle austral',
-    'Tucana': 'Toucan', 'Ursa Major': 'Grande Ourse', 'Ursa Minor': 'Petite Ourse',
-    'Vela': 'Voiles', 'Virgo': 'Vierge', 'Volans': 'Poisson volant', 'Vulpecula': 'Petit Renard'
+    'And': 'Andromède', 'Ant': 'Machine pneumatique', 'Aps': 'Oiseau de paradis',
+    'Aqr': 'Verseau', 'Aql': 'Aigle', 'Ara': 'Autel', 'Ari': 'Bélier',
+    'Aur': 'Cocher', 'Boo': 'Bouvier', 'Cae': 'Burin', 'Cam': 'Girafe',
+    'Cnc': 'Cancer', 'CVn': 'Chiens de chasse', 'CMa': 'Grand Chien',
+    'CMi': 'Petit Chien', 'Cap': 'Capricorne', 'Car': 'Carène',
+    'Cas': 'Cassiopée', 'Cen': 'Centaure', 'Cep': 'Céphée', 'Cet': 'Baleine',
+    'Cha': 'Caméléon', 'Cir': 'Compas', 'Col': 'Colombe',
+    'Com': 'Chevelure de Bérénice', 'CrA': 'Couronne australe',
+    'CrB': 'Couronne boréale', 'Crv': 'Corbeau', 'Crt': 'Coupe',
+    'Cru': 'Croix du Sud', 'Cyg': 'Cygne', 'Del': 'Dauphin', 'Dor': 'Dorade',
+    'Dra': 'Dragon', 'Equ': 'Petit Cheval', 'Eri': 'Éridan', 'For': 'Fourneau',
+    'Gem': 'Gémeaux', 'Gru': 'Grue', 'Her': 'Hercule', 'Hor': 'Horloge',
+    'Hya': 'Hydre', 'Hyi': 'Hydre mâle', 'Ind': 'Indien', 'Lac': 'Lézard',
+    'Leo': 'Lion', 'LMi': 'Petit Lion', 'Lep': 'Lièvre', 'Lib': 'Balance',
+    'Lup': 'Loup', 'Lyn': 'Lynx', 'Lyr': 'Lyre', 'Men': 'Table',
+    'Mic': 'Microscope', 'Mon': 'Licorne', 'Mus': 'Mouche', 'Nor': 'Règle',
+    'Oct': 'Octant', 'Oph': 'Serpentaire', 'Ori': 'Orion', 'Pav': 'Paon',
+    'Peg': 'Pégase', 'Per': 'Persée', 'Phe': 'Phénix', 'Pic': 'Peintre',
+    'Psc': 'Poissons', 'PsA': 'Poisson austral', 'Pup': 'Poupe', 'Pyx': 'Boussole',
+    'Ret': 'Réticule', 'Sge': 'Flèche', 'Sgr': 'Sagittaire', 'Sco': 'Scorpion',
+    'Scl': 'Sculpteur', 'Sct': 'Écu de Sobieski', 'Ser': 'Serpent',
+    'Sex': 'Sextant', 'Tau': 'Taureau', 'Tel': 'Télescope', 'Tri': 'Triangle',
+    'TrA': 'Triangle austral', 'Tuc': 'Toucan', 'UMa': 'Grande Ourse',
+    'UMi': 'Petite Ourse', 'Vel': 'Voiles', 'Vir': 'Vierge',
+    'Vol': 'Poisson volant', 'Vul': 'Petit Renard'
 }
 
-# 3. Dictionnaire des En-têtes de colonnes
+# 3. Dictionnaire des En-têtes
 column_map = {
     'ObjectNum': 'N° Objet',
     'Name': 'Nom',
@@ -86,49 +82,35 @@ def clean_info_text(text):
     """Traduit le contenu textuel de la colonne Info"""
     if not isinstance(text, str):
         return text
-    # Remplacements spécifiques dans le texte
-    text = text.replace('Size:', 'Taille :')
-    text = text.replace('Sep:', 'Sép :')
-    text = text.replace('mag', 'mag') # Souvent déjà ok, mais au cas où
+    replacements = {'Size:': 'Taille :', 'size:': 'Taille :', 'Sep:': 'Sép :', 'sep:': 'Sép :'}
+    for old, new in replacements.items():
+        text = text.replace(old, new)
     return text
 
 try:
     print(f"Lecture du fichier {input_file} en cours...")
     df = pd.read_excel(input_file, header=2)
     
-    print(f"Colonnes détectées : {list(df.columns)}")
-
-    # A. TRADUCTION DES DONNÉES
-    # -------------------------
+    # TRADUCTION DES TYPES
     if 'Type' in df.columns:
-        print("Traduction de la colonne 'Type'...")
-        df['Type'] = df['Type'].astype(str).str.strip()
-        df['Type'] = df['Type'].replace('nan', np.nan) # Gère le "nan" texte
+        df['Type'] = df['Type'].astype(str).str.strip().replace('nan', np.nan)
         df['Type'] = df['Type'].map(type_map).fillna(df['Type'])
     
+    # TRADUCTION DES CONSTELLATIONS
     if 'Constellation' in df.columns:
-        print("Traduction de la colonne 'Constellation'...")
-        df['Constellation'] = df['Constellation'].astype(str).str.strip()
-        df['Constellation'] = df['Constellation'].replace('nan', np.nan)
+        df['Constellation'] = df['Constellation'].astype(str).str.strip().replace('nan', np.nan)
         df['Constellation'] = df['Constellation'].map(const_map).fillna(df['Constellation'])
 
+    # TRADUCTION INFO
     if 'Info' in df.columns:
-        print("Traduction partielle de la colonne 'Info'...")
         df['Info'] = df['Info'].apply(clean_info_text)
 
-    # B. NETTOYAGE FINAL (Les "nan")
-    # ------------------------------
-    # Remplace toutes les valeurs manquantes (NaN) par du vide ""
-    df = df.fillna("")
-    # Remplace aussi la chaîne de caractères "nan" si elle traîne encore
-    df = df.replace("nan", "")
+    # NETTOYAGE GLOBAL
+    df = df.fillna("").replace("nan", "")
 
-    # C. TRADUCTION DES EN-TÊTES
-    # --------------------------
-    print("Traduction des en-têtes de colonnes...")
+    # EN-TÊTES
     df.rename(columns=column_map, inplace=True)
 
-    # Sauvegarde
     df.to_excel(output_file, index=False)
     print(f"Traduction terminée ! Fichier Excel généré : {output_file}")
 

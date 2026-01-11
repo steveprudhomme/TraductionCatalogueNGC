@@ -5,6 +5,12 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.2.1] - 2026-01-11
+
+### Corrigé
+- Correction majeure du dictionnaire des constellations : utilisation des abréviations standards (ex: `And`, `Ori`) au lieu des noms latins complets, pour correspondre au format du fichier source.
+- Les constellations comme "Grande Ourse" (UMa) ou "Orion" (Ori) sont désormais correctement traduites.
+
 ## [1.2.0] - 2026-01-11
 
 ### Fonctionnalités

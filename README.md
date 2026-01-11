@@ -1,4 +1,4 @@
-# Traducteur de Catalogue NGC (Python - v1.2.0)
+# Traducteur de Catalogue NGC (Python - v1.2.1)
 
 Ce projet est un script utilitaire en Python conçu pour automatiser la traduction de catalogues astronomiques (format Excel) de l'anglais vers le français. Il est spécifiquement optimisé pour le catalogue NGC (New General Catalogue).
 
@@ -12,11 +12,12 @@ Ce projet est un script utilitaire en Python conçu pour automatiser la traducti
 
 ## ✨ Fonctionnalités
 
-* **Support Excel complet** : Lit les fichiers `.xls` (anciens) et génère des fichiers `.xlsx` (modernes).
+
+* **Support Excel complet** : Lit les fichiers `.xls` (anciens) et génère des fichiers `.xlsx`.
 * **Traduction Intelligente** :
     * **Types d'objets** : Traduit "Globular Cluster" en "Amas globulaire", "Asterism", etc.
-    * **Constellations** : Traduit les noms latins (ex: "Ursa Major") en français.
-    * **En-têtes de colonnes** : Renomme les colonnes (ex: `ObjectNum` -> `N° Objet`, `RAHour` -> `AD Heure`).
+    * **Constellations** : Détecte et traduit les abréviations de l'UAI (ex: "UMa" -> "Grande Ourse", "Ori" -> "Orion").
+    * **En-têtes de colonnes** : Renomme les colonnes (ex: `ObjectNum` -> `N° Objet`).
     * **Infos détaillées** : Traduit le contenu des descriptions (ex: `Size:` -> `Taille :`).
 * **Nettoyage de Données** :
     * Supprime les espaces invisibles qui bloquent la traduction.
