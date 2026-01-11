@@ -1,12 +1,14 @@
 import pandas as pd
+import numpy as np
 
 # --- CONFIGURATION ---
 input_file = 'NGCObjects.xls'
 output_file = 'NGCObjects_FR.xlsx'
 # ---------------------
 
-# Dictionnaires
+# 1. Dictionnaire des Types (Complété)
 type_map = {
+    # Types communs
     'Open Cluster': 'Amas ouvert',
     'Globular Cluster': 'Amas globulaire',
     'Diffuse Nebula': 'Nébuleuse diffuse',
@@ -23,11 +25,17 @@ type_map = {
     'Emission Nebula': 'Nébuleuse en émission',
     'Reflection Nebula': 'Nébuleuse par réflexion',
     'Dark Nebula': 'Nébuleuse obscure',
-    # Ajouts de sécurité pour les cas fréquents
+    # Nouveaux ajouts demandés
+    'Star': 'Étoile',
+    'Triple Star': 'Étoile triple',
+    'Cluster Nebulosity': 'Nébulosité d\'amas',
+    'Asterism': 'Astérisme',
+    'Nebulosity in External Galaxy': 'Nébulosité dans une galaxie externe',
     'Galaxy': 'Galaxie',
     'Nebula': 'Nébuleuse'
 }
 
+# 2. Dictionnaire des Constellations (Partiel - s'applique aux principales)
 const_map = {
     'Andromeda': 'Andromède', 'Antlia': 'Machine pneumatique', 'Apus': 'Oiseau de paradis',
     'Aquarius': 'Verseau', 'Aquila': 'Aigle', 'Ara': 'Autel', 'Aries': 'Bélier',
@@ -58,26 +66,67 @@ const_map = {
     'Vela': 'Voiles', 'Virgo': 'Vierge', 'Volans': 'Poisson volant', 'Vulpecula': 'Petit Renard'
 }
 
+# 3. Dictionnaire des En-têtes de colonnes
+column_map = {
+    'ObjectNum': 'N° Objet',
+    'Name': 'Nom',
+    'Type': 'Type',
+    'Constellation': 'Constellation',
+    'RAHour': 'AD Heure',
+    'RAMinute': 'AD Minute',
+    'DecSign': 'Déc Signe',
+    'DecDeg': 'Déc Degré',
+    'DecMinute': 'Déc Minute',
+    'Magnitude': 'Magnitude',
+    'Info': 'Infos',
+    'Distance (ly)': 'Distance (al)'
+}
+
+def clean_info_text(text):
+    """Traduit le contenu textuel de la colonne Info"""
+    if not isinstance(text, str):
+        return text
+    # Remplacements spécifiques dans le texte
+    text = text.replace('Size:', 'Taille :')
+    text = text.replace('Sep:', 'Sép :')
+    text = text.replace('mag', 'mag') # Souvent déjà ok, mais au cas où
+    return text
+
 try:
     print(f"Lecture du fichier {input_file} en cours...")
-    
-    # header=2 pour sauter les deux premières lignes
     df = pd.read_excel(input_file, header=2)
     
     print(f"Colonnes détectées : {list(df.columns)}")
 
-    # --- CORRECTION : Nettoyage des espaces ---
+    # A. TRADUCTION DES DONNÉES
+    # -------------------------
     if 'Type' in df.columns:
-        print("Nettoyage et traduction de la colonne 'Type'...")
-        # On force en texte (.astype(str)) et on enlève les espaces (.str.strip())
+        print("Traduction de la colonne 'Type'...")
         df['Type'] = df['Type'].astype(str).str.strip()
+        df['Type'] = df['Type'].replace('nan', np.nan) # Gère le "nan" texte
         df['Type'] = df['Type'].map(type_map).fillna(df['Type'])
     
     if 'Constellation' in df.columns:
-        print("Nettoyage et traduction de la colonne 'Constellation'...")
+        print("Traduction de la colonne 'Constellation'...")
         df['Constellation'] = df['Constellation'].astype(str).str.strip()
+        df['Constellation'] = df['Constellation'].replace('nan', np.nan)
         df['Constellation'] = df['Constellation'].map(const_map).fillna(df['Constellation'])
-    # ------------------------------------------
+
+    if 'Info' in df.columns:
+        print("Traduction partielle de la colonne 'Info'...")
+        df['Info'] = df['Info'].apply(clean_info_text)
+
+    # B. NETTOYAGE FINAL (Les "nan")
+    # ------------------------------
+    # Remplace toutes les valeurs manquantes (NaN) par du vide ""
+    df = df.fillna("")
+    # Remplace aussi la chaîne de caractères "nan" si elle traîne encore
+    df = df.replace("nan", "")
+
+    # C. TRADUCTION DES EN-TÊTES
+    # --------------------------
+    print("Traduction des en-têtes de colonnes...")
+    df.rename(columns=column_map, inplace=True)
 
     # Sauvegarde
     df.to_excel(output_file, index=False)

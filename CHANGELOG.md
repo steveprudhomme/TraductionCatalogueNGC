@@ -5,6 +5,17 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.2.0] - 2026-01-11
+
+### Fonctionnalités
+- Traduction complète des en-têtes de colonnes (ex: `ObjectNum` -> `N° Objet`).
+- Traduction du contenu de la colonne `Info` (ex: `Size:` -> `Taille :`).
+- Nouveaux types d'objets supportés : Star, Cluster Nebulosity, Triple Star, Asterism, Nebulosity in External Galaxy.
+
+### Améliorations
+- Gestion globale des valeurs manquantes (`nan`) : elles sont désormais remplacées par des cellules vides.
+- Mise à jour du `README.md` avec les nouvelles fonctionnalités et la dépendance `numpy`.
+
 ## [1.1.3] - 2026-01-11
 
 ### Corrigé
